@@ -18,14 +18,14 @@
             label="關鍵字查詢"
             single-line
             hide-details
+            @blur="getNameList"
           ></v-text-field> 
           <v-spacer></v-spacer>
-          <v-btn color="success" dark ><v-icon>mdi-refresh</v-icon></v-btn>
+           <!-- <v-btn color="success" dark ><v-icon>mdi-refresh</v-icon></v-btn> -->
         </v-card-title>
         <v-data-table
           :headers="headers"
           :items="desserts"
-          :search="search"
         >
           <template v-slot:[`item.flag`]="{ item }">
           <div class="flag__box">
@@ -82,6 +82,14 @@ export default {
         console.log('data', data[0])
         this.desserts = (data)? data : []
       })
+    },
+    getNameList () {
+      // if (!this.search) return
+      // $api.testGet(`v2/name/eesti`).then(resp => {
+      //   const { data } = resp
+      //   console.log('data', data[0])
+      //   this.desserts = (data)? data : []
+      // })
     },
     openDialog (item) {
       console.log('open dialog');
