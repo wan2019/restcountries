@@ -1,4 +1,4 @@
-# game-ui
+# restcountries
 
 ## Project setup
 ```
