@@ -12,10 +12,9 @@
             <slot name="btn">
               <v-row v-if="showBtn">
                 <v-col cols="6">
-                  <v-btn block color="cancel" dark @click="close">取消</v-btn>
                 </v-col>
-                <v-col cols="6">
-                  <v-btn block color="success" dark @click="confirm">確定</v-btn>
+                <v-col cols="12" md="6">
+                  <v-btn block color="cancel" dark @click="confirm">關閉</v-btn>
                 </v-col>
               </v-row>
             </slot>
