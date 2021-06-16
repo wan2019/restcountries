@@ -5,19 +5,17 @@ let PACKAGE_VERSION  = "'" + pjson.version + "'"
 const Timestamp = new Date().getTime();
 console.log(`===================env=======================`)
 console.log(process.env.npm_lifecycle_event)
-console.log('env',process.env.NODE_ENV)
-console.log('serve', process.env.NODE_ENV.includes('development'));
-console.log(`PACKAGE_VERSION ${PACKAGE_VERSION}`)
+console.log('serve', process.env.NODE_ENV.includes('serve'));
 console.log(`===================env=======================`)
 module.exports = {
-  publicPath: process.env.NODE_ENV.includes('development')
+  publicPath: process.env.NODE_ENV.includes('serve')
   ? '/'
   : '/restcountries/',
   outputDir: 'restcountries',
   "transpileDependencies": [
     "vuetify"
   ],
-  lintOnSave: process.env.NODE_ENV !== 'production',
+  lintOnSave: process.env.NODE_ENV !== 'development',
   devServer: {
     headers: { "Access-Control-Allow-Origin": "*" },
     overlay: {
@@ -34,38 +32,24 @@ module.exports = {
   },
   chainWebpack: config => {
     config.module
-      .rule("eslint")
-      .use("eslint-loader")
-        .options({
-            fix: true
-        });
+      .rule("html")            //create a named rule
+      // .test(/web-components/)  //define the file test
+      // .use("html-loader")      //create a named use
+      // .loader("html-loader")   //assign a loader
+      .end(); 
+      // .rule("eslint")
+      // .use("eslint-loader")
+      //   .options({
+      //       fix: true
+      //   });
   },
   configureWebpack: {
     plugins: [
       new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery',
-        moment: 'moment',
         $api: ['@/assets/js/api.js', 'default']
-    }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-    ],
-    output: {
-      filename: `[name].${PACKAGE_VERSION}.${Timestamp}.js`,
-      chunkFilename: `[name].${PACKAGE_VERSION}.${Timestamp}.js`
-    },
+    })
+    ]
   },
   pluginOptions: {
-    moment: {
-      locales: ['en']
-    }
-  },
-  // css:{
-  //   loaderOptions:{
-  //     scss:{
-  //       prependData: `@import "@/assets/css/app.scss";`
-  //     }
-  //   }
-  // }
+  }
 }

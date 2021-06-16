@@ -20,5 +20,10 @@ yarn build
 yarn lint
 ```
 
+### 腳本
+```
+sh ./deploy.sh
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

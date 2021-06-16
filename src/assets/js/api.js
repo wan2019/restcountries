@@ -1,17 +1,16 @@
 import axios from 'axios'
 
-
 const api = axios.create({
 })
-api.defaults.withCredentials = true
-api.defaults.headers.common['client-type'] = 'ajax'
+// eslint-disable-next-line
+const host = process.env.VUE_APP_API_URL
 
 export default {
   api,
   testGet (url) {
     return api({
       method: 'get',
-      url: `/rest/${url}`
+      url: `${host}/rest/${url}`
     })
   }
 }
